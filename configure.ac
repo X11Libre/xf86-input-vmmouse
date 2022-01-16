@@ -30,7 +30,7 @@ AC_CONFIG_SRCDIR([Makefile.am])
 AC_CONFIG_AUX_DIR(.)
 AC_CONFIG_HEADERS([config.h])
 
-AM_INIT_AUTOMAKE([foreign dist-bzip2])
+AM_INIT_AUTOMAKE([foreign dist-xz])
 
 # XORG_DEFAULT_OPTIONS below forces C99. Solaris GCC doesn't like that.
 AC_PROG_CC
