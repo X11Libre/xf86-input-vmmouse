@@ -40,6 +40,7 @@
 #include <xorg-config.h>
 #endif
 
+#include <X11/Xdefs.h>
 #include <stdbool.h>
 
 #if defined(VMMOUSE_OS_BSD)
@@ -56,13 +57,13 @@
 /***************************************************************************/
 /* I/O Permissions section                                                 */
 /***************************************************************************/
-static bool ExtendedEnabled = false;
+static Bool ExtendedEnabled = false;
 
-bool
+Bool
 xf86EnableIO()
 {
     if (ExtendedEnabled)
-	return true;
+	return false;
 
     if (IOPL_NAME(1) < 0)
 	return false;
@@ -91,7 +92,7 @@ xf86DisableIO()
 #include <unistd.h>
 static int IoFd = -1;
 
-bool
+Bool
 xf86EnableIO()
 {
     if (IoFd >= 0)
@@ -117,12 +118,12 @@ xf86DisableIO()
 
 #elif defined(VMMOUSE_OS_GENERIC)
 
-static bool ExtendedEnabled = false;
+static Bool ExtendedEnabled = false;
 
 extern int ioperm(unsigned long __from, unsigned long __num, int __turn_on);
 extern int iopl(int __level);
 
-bool xf86EnableIO(void)
+Bool xf86EnableIO(void)
 {
     if (ExtendedEnabled)
 	return true;
@@ -181,9 +182,9 @@ xf86DisableIO(void)
 #include <sys/psw.h>
 #endif
 
-static bool ExtendedEnabled = false;
+static Bool ExtendedEnabled = false;
 
-bool
+Bool
 xf86EnableIO(void)
 {
     if (ExtendedEnabled)
