@@ -24,6 +24,6 @@
 @DRIVER_NAME@_drv_ladir = @inputdir@
 
 AM_CPPFLAGS = -I$(top_srcdir)/shared $(XORG_CFLAGS)
+AM_CFLAGS = $(BASE_CFLAGS)
 
 @DRIVER_NAME@_drv_la_SOURCES = @DRIVER_NAME@.c xf86OSmouse.h
-                               
