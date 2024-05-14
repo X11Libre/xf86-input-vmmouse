@@ -39,9 +39,7 @@ extern int vmmouse_uses_kernel_driver(void);
 void
 segvCB(int sig)
 {
-#if defined HAVE_XORG_SERVER_1_1_0
    exit(1);
-#endif
 }
 
 

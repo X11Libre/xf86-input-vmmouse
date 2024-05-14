@@ -37,12 +37,7 @@
 #define _VMMOUSE_PROTO_H_
 
 #include <stdint.h>
-
-#ifdef HAVE_XORG_SERVER_1_1_0
 #include <unistd.h>
-#else
-#include "xf86_libc.h"
-#endif
 
 /* Map Solaris/Sun compiler #defines to gcc equivalents */
 #if !defined __i386__ && defined __i386
