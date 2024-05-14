@@ -80,11 +80,6 @@
 #include "xisb.h"
 #include "mipointer.h"
 
-#ifndef HAVE_XORG_SERVER_1_5_0
-#include <xf86_ansic.h>
-#include <xf86_libc.h>
-#endif
-
 /*****************************************************************************
  *	Local Headers
  ****************************************************************************/
@@ -329,19 +324,6 @@ VMMousePreInit(InputDriverPtr drv, IDevPtr dev, int flags)
 {
    InputInfoPtr pInfo;
 
-#ifndef NO_MOUSE_MODULE
-{
-   OSMouseInfoPtr osInfo = NULL;
-
-   /*
-    * let Xserver init the mouse first
-    */
-   osInfo = xf86OSMouseInit(0);
-   if (!osInfo)
-      return FALSE;
-}
-#endif
-
    /*
     * enable hardware access
     */
@@ -576,14 +558,6 @@ VMMouseDoPostEvent(InputInfoPtr pInfo, int buttons, int dx, int dy)
                     (mPriv->vmmousePrevInput.Flags & VMMOUSE_MOVE_RELATIVE);
     }
     if (mouseMoved) {
-
-#ifdef CALL_CONVERSION_PROC
-        /*
-         * Xservers between 1.3.99.0 - 1.4.0.90 do not call conversion_proc, so
-         * we need to do the conversion from device to screen space.
-         */
-        VMMouseConvertProc(pInfo, 0, 2, dx, dy, 0, 0, 0, 0, &dx, &dy);
-#endif
         xf86PostMotionEvent(pInfo->dev, !mPriv->isCurrRelative, 0, 2, dx, dy);
     }
 
@@ -873,13 +847,8 @@ VMMouseDeviceControl(DeviceIntPtr device, int mode)
       btn_labels[6] = XIGetKnownProperty(BTN_LABEL_PROP_BTN_HWHEEL_RIGHT);
       /* other buttons are unknown */
 
-#ifdef ABS_VALUATOR_AXES
       axes_labels[0] = XIGetKnownProperty(AXIS_LABEL_PROP_ABS_X);
       axes_labels[1] = XIGetKnownProperty(AXIS_LABEL_PROP_ABS_Y);
-#else
-      axes_labels[0] = XIGetKnownProperty(AXIS_LABEL_PROP_REL_X);
-      axes_labels[1] = XIGetKnownProperty(AXIS_LABEL_PROP_REL_Y);
-#endif /* ABS_VALUATOR_AXES */
 #endif
 
       InitPointerDeviceStruct((DevicePtr)device, map,
@@ -904,7 +873,6 @@ VMMouseDeviceControl(DeviceIntPtr device, int mode)
                                 );
 
       /* X valuator */
-#ifdef ABS_VALUATOR_AXES
       xf86InitValuatorAxisStruct(device, 0,
 #if GET_ABI_MAJOR(ABI_XINPUT_VERSION) >= 7
 				axes_labels[0],
@@ -914,20 +882,8 @@ VMMouseDeviceControl(DeviceIntPtr device, int mode)
                                 , Absolute
 #endif
                                 );
-#else
-      xf86InitValuatorAxisStruct(device, 0,
-#if GET_ABI_MAJOR(ABI_XINPUT_VERSION) >= 7
-				axes_labels[0],
-#endif
-				0, -1, 1, 0, 1
-#if GET_ABI_MAJOR(ABI_XINPUT_VERSION) >= 12
-                                , Relative
-#endif
-                                );
-#endif
       xf86InitValuatorDefaults(device, 0);
       /* Y valuator */
-#ifdef ABS_VALUATOR_AXES
       xf86InitValuatorAxisStruct(device, 1,
 #if GET_ABI_MAJOR(ABI_XINPUT_VERSION) >= 7
 				axes_labels[1],
@@ -937,17 +893,6 @@ VMMouseDeviceControl(DeviceIntPtr device, int mode)
                                 , Absolute
 #endif
                                 );
-#else
-      xf86InitValuatorAxisStruct(device, 1,
-#if GET_ABI_MAJOR(ABI_XINPUT_VERSION) >= 7
-				axes_labels[1],
-#endif
-				0, -1, 1, 0, 1
-#if GET_ABI_MAJOR(ABI_XINPUT_VERSION) >= 12
-                                , Relative
-#endif
-                                );
-#endif
       xf86InitValuatorDefaults(device, 1);
 #if GET_ABI_MAJOR(ABI_XINPUT_VERSION) == 0
       xf86MotionHistoryAllocate(pInfo);
@@ -1345,27 +1290,6 @@ VMMousePlug(pointer	module,
 
    xf86Msg(X_INFO, "VMWARE(0): VMMOUSE module was loaded\n");
    xf86AddInputDriver(&VMMOUSE, module, 0);
-
-#ifndef NO_MOUSE_MODULE
-{
-   char *name;
-   /*
-    * Load the normal mouse module as submodule
-    * If we fail in PreInit later, this allows us to fall back to normal mouse module
-    */
-#ifndef NORMALISE_MODULE_NAME
-   name = strdup("mouse");
-#else
-   /* Normalise the module name */
-   name = xf86NormalizeName("mouse");
-#endif
-
-   if (!LoadSubModule(module, name, NULL, NULL, NULL, NULL, errmaj, errmin)) {
-      LoaderErrorMsg(NULL, name, *errmaj, *errmin);
-   }
-   free(name);
-}
-#endif
 
    return module;
 }

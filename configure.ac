@@ -185,26 +185,7 @@ if test x$use_x86_64_iopl = xyes; then
                 [AC_MSG_ERROR([cannot find library for x86_64_iopl])])
 fi
 
-PKG_CHECK_MODULES(XORG, [xorg-server >= 1.0.1] xproto $REQUIRED_MODULES)
-
-PKG_CHECK_EXISTS([xorg-server >= 1.1.0],
-                 [AC_DEFINE([HAVE_XORG_SERVER_1_1_0], 1,
-                            [Has version 1.1.0 or greater of the Xserver])])
-
-PKG_CHECK_EXISTS([xorg-server > 1.4.99],
-		[AC_DEFINE([HAVE_XORG_SERVER_1_5_0], 1,
-		[Has version 1.5.0 or greater of the Xserver])])
-
-PKG_CHECK_EXISTS([xorg-server >= 1.3.99.0 xorg-server <= 1.4.0.90],
-                 [AC_DEFINE([CALL_CONVERSION_PROC], 1,
-                            [Call conversion_proc from within the driver, as
-                             Xserver doesn't])])
-PKG_CHECK_EXISTS([xorg-server > 1.4.0.90],
-		 [AC_DEFINE([ABS_VALUATOR_AXES], 1,
-			    [Define absolute valuator axes])])
-PKG_CHECK_EXISTS([xorg-server >= 1.6.0],
-		 [AC_DEFINE([NO_MOUSE_MODULE], 1,
-			    [Do not include built-in mouse module fallback])])
+PKG_CHECK_MODULES(XORG, [xorg-server >= 1.18] xproto $REQUIRED_MODULES)
 
 # Checks for libraries.
 
