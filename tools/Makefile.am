@@ -35,7 +35,7 @@ callouts_SCRIPTS = hal-probe-vmmouse
 hal-probe-vmmouse: hal-probe-vmmouse.in
 	$(AM_V_GEN)$(SED) -e 's|__BIN_PREFIX__|$(bindir)|g' \
 	    -e 's|__HAL_BIN_PREFIX__|$(HAL_BIN_DIR)|g' \
-	    < $< > $@
+	    < $(srcdir)/hal-probe-vmmouse.in > $@
 
 CLEANFILES = hal-probe-vmmouse
 
@@ -51,7 +51,7 @@ udevdir=$(UDEV_RULES_DIR)
 udev_DATA = 69-xorg-vmmouse.rules
 
 $(udev_DATA): $(udev_DATA).in
-	$(AM_V_GEN)$(SED) -e 's|__BIN_PREFIX__|$(bindir)|g' < $< > $@
+	$(AM_V_GEN)$(SED) -e 's|__BIN_PREFIX__|$(bindir)|g' < $(srcdir)/$(udev_DATA).in > $@
 
 CLEANFILES += $(udev_DATA)
 
