@@ -207,7 +207,6 @@ static const char *reqSymbols[] = {
    "XisbFree",
    "XisbNew",
    "XisbRead",
-   "Xstrdup",
    NULL
 };
 #endif
@@ -753,15 +752,15 @@ MouseCommonOptions(InputInfoPtr pInfo)
       if (!xf86NameCmp(s, "x")) {
 	 pMse->negativeZ = pMse->positiveZ = MSE_MAPTOX;
 	 pMse->negativeW = pMse->positiveW = MSE_MAPTOX;
-	 msg = xstrdup("X axis");
+	 msg = strdup("X axis");
       } else if (!xf86NameCmp(s, "y")) {
 	 pMse->negativeZ = pMse->positiveZ = MSE_MAPTOY;
 	 pMse->negativeW = pMse->positiveW = MSE_MAPTOY;
-	 msg = xstrdup("Y axis");
+	 msg = strdup("Y axis");
       } else if (sscanf(s, "%d %d %d %d", &b1, &b2, &b3, &b4) >= 2 &&
 		 b1 > 0 && b1 <= MSE_MAXBUTTONS &&
 		 b2 > 0 && b2 <= MSE_MAXBUTTONS) {
-	 msg = xstrdup("buttons XX and YY");
+	 msg = strdup("buttons XX and YY");
 	 if (msg)
 	    sprintf(msg, "buttons %d and %d", b1, b2);
 	 pMse->negativeZ = pMse->negativeW = 1 << (b1-1);
@@ -1355,7 +1354,7 @@ VMMousePlug(pointer	module,
     * If we fail in PreInit later, this allows us to fall back to normal mouse module
     */
 #ifndef NORMALISE_MODULE_NAME
-   name = xstrdup("mouse");
+   name = strdup("mouse");
 #else
    /* Normalise the module name */
    name = xf86NormalizeName("mouse");
