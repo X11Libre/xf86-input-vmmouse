@@ -18,8 +18,10 @@
 #  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 #  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-# Ensure xorg.conf.d snippets are installed below $(prefix) for distcheck
+# During distcheck, system locations (as provided by pkg-config) may
+# not be writable; provide instead relative locations.
 DISTCHECK_CONFIGURE_FLAGS = --with-xorg-conf-dir='$${datadir}/X11/xorg.conf.d' \
+                            --with-xorg-module-dir='$${libdir}/xorg/modules' \
                             --with-udev-rules-dir='$${libdir}/udev/rules.d'
 
 SUBDIRS = shared src tools fdi man
