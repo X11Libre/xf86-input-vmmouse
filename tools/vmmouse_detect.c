@@ -57,7 +57,7 @@ main(void)
     */
    signal(SIGSEGV, segvCB);
 
-#if defined __i386__ || defined __x86_64__ 
+#if defined __i386__ || defined __x86_64__
    (void) xf86EnableIO();
    if (VMMouseClient_Enable()) {
       VMMouseClient_Disable();
