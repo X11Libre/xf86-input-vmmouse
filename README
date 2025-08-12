@@ -3,13 +3,13 @@ VMMouse
 
 The VMMouse driver enables support for the special VMMouse protocol
 that is provided by VMware virtual machines to give absolute pointer
-positioning. 
+positioning.
 
-Installing the driver will improve the user experience when using the 
-mouse to interact with the guest operating system. In particular, use of 
-the driver improves mouse "lag", provides mouse speed and acceleration 
-consistent with the user's host operating system, and enables the 
-auto-grab/ungrab feature in VMware products without requiring the VMware 
+Installing the driver will improve the user experience when using the
+mouse to interact with the guest operating system. In particular, use of
+the driver improves mouse "lag", provides mouse speed and acceleration
+consistent with the user's host operating system, and enables the
+auto-grab/ungrab feature in VMware products without requiring the VMware
 toolbox application.
 
 Using the driver
@@ -36,7 +36,7 @@ operating system, a linux kernel input driver or even gpm.
 The driver is composed of three different layers:
 
 1) The vmmouse protocol layer (vmmouse_proto.[c|h])
-   - This provides the call to read and write the port over which 
+   - This provides the call to read and write the port over which
      the vmmouse packets are transfered.
 
 2) The vmmouse client layer (vmmouse_client.[c|h])
