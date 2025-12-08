@@ -39,6 +39,8 @@
 #ifndef _VMMOUSE_CLIENT_H_
 #define _VMMOUSE_CLIENT_H_
 
+#include <stdbool.h>
+
 #include "xorg-server.h"
 #include "xf86_OSproc.h"
 
@@ -56,7 +58,7 @@ typedef struct _VMMOUSE_INPUT_DATA {
 /*
  * Public Functions
  */
-Bool VMMouseClient_Enable(void);
+bool VMMouseClient_Enable(void);
 void VMMouseClient_Disable(void);
 unsigned int VMMouseClient_GetInput(PVMMOUSE_INPUT_DATA pvmmouseInput);
 void VMMouseClient_RequestRelative(void);

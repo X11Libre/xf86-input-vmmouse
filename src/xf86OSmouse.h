@@ -30,6 +30,8 @@
 #ifndef _XF86OSMOUSE_H_
 #define _XF86OSMOUSE_H_
 
+#include <stdbool.h>
+
 #include "xf86Xinput.h"
 
 /* Mouse interface classes */
@@ -77,8 +79,8 @@ struct _MouseDevRec;
 
 typedef int (*GetInterfaceTypesProc)(void);
 typedef const char **(*BuiltinNamesProc)(void);
-typedef Bool (*CheckProtocolProc)(const char *protocol);
-typedef Bool (*BuiltinPreInitProc)(InputInfoPtr pInfo, const char *protocol,
+typedef bool (*CheckProtocolProc)(const char *protocol);
+typedef bool (*BuiltinPreInitProc)(InputInfoPtr pInfo, const char *protocol,
 				   int flags);
 typedef const char *(*DefaultProtocolProc)(void);
 typedef const char *(*SetupAutoProc)(InputInfoPtr pInfo, int *protoPara);
@@ -116,7 +118,7 @@ typedef struct {
  *		directly in the main "mouse" driver.
  *
  * CheckProtocol: Checks if the protocol name given is supported by the
- *		OS.  It should return TRUE for both "builtin" protocols and
+ *		OS.  It should return true for both "builtin" protocols and
  *		protocols of type MSE_MISC that are supported by the OS.
  *
  * PreInit:	The PreInit function for protocols that are builtin.  This
@@ -191,9 +193,9 @@ extern OSMouseInfoPtr xf86OSMouseInit(int flags);
  */
 
 typedef void (*checkMovementsProc)(InputInfoPtr,int, int);
-typedef void (*autoProbeProc)(InputInfoPtr, Bool, Bool);
-typedef Bool (*collectDataProc)(struct _MouseDevRec *, unsigned char);
-typedef Bool (*dataGoodProc)(struct _MouseDevRec *);
+typedef void (*autoProbeProc)(InputInfoPtr, bool, bool);
+typedef bool (*collectDataProc)(struct _MouseDevRec *, unsigned char);
+typedef bool (*dataGoodProc)(struct _MouseDevRec *);
 
 typedef void (*PostMseEventProc)(InputInfoPtr pInfo, int buttons,
 			      int dx, int dy, int dz, int dw);
@@ -219,11 +221,11 @@ typedef struct _MouseDevRec {
     int			den;
     int			buttons;	/* # of buttons */
     int			emulateState;	/* automata state for 2 button mode */
-    Bool		emulate3Buttons;
-    Bool		emulate3ButtonsSoft;
+    bool		emulate3Buttons;
+    bool		emulate3ButtonsSoft;
     int			emulate3Timeout;/* Timeout for 3 button emulation */
-    Bool		chordMiddle;
-    Bool                flipXY;
+    bool		chordMiddle;
+    bool                flipXY;
     int                 invX;
     int                 invY;
     int			mouseFlags;	/* Flags to Clear after opening
@@ -245,9 +247,9 @@ typedef struct _MouseDevRec {
     InputInfoPtr	pInfo;
     int			origProtocolID;
     const char *	origProtocol;
-    Bool		emulate3Pending;/* timer waiting */
+    bool		emulate3Pending;/* timer waiting */
     CARD32		emulate3Expires;/* time to fire emulation code */
-    Bool		emulateWheel;
+    bool		emulateWheel;
     int			wheelInertia;
     int			wheelButton;
     int			negativeX;	/* Button values.  Unlike the Z and */
@@ -256,7 +258,7 @@ typedef struct _MouseDevRec {
     int			positiveY;
     int			wheelYDistance;
     int			wheelXDistance;
-    Bool		autoProbe;
+    bool		autoProbe;
     checkMovementsProc  checkMovements;
     autoProbeProc	autoProbeMouse;
     collectDataProc	collectData;
