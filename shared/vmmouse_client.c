@@ -39,6 +39,8 @@
 #include "config.h"
 #endif
 
+#include <stdbool.h>
+
 #include "vmmouse_client.h"
 #include "vmmouse_proto.h"
 
@@ -56,7 +58,7 @@
  *----------------------------------------------------------------------------
  */
 
-static Bool
+static bool
 VMMouseClientVMCheck(void)
 {
    VMMouseProtoCmd vmpc;
@@ -70,10 +72,10 @@ VMMouseClientVMCheck(void)
     * eax should contain version
     */
    if (vmpc.out.vEbx != VMMOUSE_PROTO_MAGIC || vmpc.out.vEax == 0xffffffff) {
-      return FALSE;
+      return false;
    }
 
-   return TRUE;
+   return true;
 }
 
 
@@ -87,8 +89,8 @@ VMMouseClientVMCheck(void)
  *	if we're enabled before attempting to disable the VMMouse).
  *
  * Results:
- *	TRUE if we successfully disable the VMMouse communication mode,
- *	FALSE if something went wrong.
+ *	true if we successfully disable the VMMouse communication mode,
+ *	false if something went wrong.
  *
  * Side effects:
  *	Disables the absolute positioning mode.
@@ -129,7 +131,7 @@ VMMouseClient_Disable(void)
  *	and return the result, but conceivably we could do more.
  *
  * Results:
- *	TRUE if the enable succeeds, FALSE otherwise.
+ *	true if the enable succeeds, false otherwise.
  *
  * Side effects:
  *	Causes host-side state change.
@@ -137,7 +139,7 @@ VMMouseClient_Disable(void)
  *----------------------------------------------------------------------
  */
 
-Bool
+bool
 VMMouseClient_Enable(void) {
 
    uint32_t status;
@@ -150,7 +152,7 @@ VMMouseClient_Enable(void) {
     */
 
    if (!VMMouseClientVMCheck()) {
-      return FALSE;
+      return false;
    }
 
    VMwareLog(("VMMouseClientVMCheck succeeded, checking VMMOUSE version\n"));
@@ -175,7 +177,7 @@ VMMouseClient_Enable(void) {
    status = vmpc.out.vEax;
    if ((status & 0x0000ffff) == 0) {
       VMwareLog(("VMMouseClient_Enable: no data on port."));
-      return FALSE;
+      return false;
    }
 
    /*
@@ -188,7 +190,7 @@ VMMouseClient_Enable(void) {
    data = vmpc.out.vEax;
    if (data!= VMMOUSE_VERSION_ID) {
       VMwareLog(("VMMouseClient_Enable: data was not VERSION_ID"));
-      return FALSE;
+      return false;
    }
 
    /*
@@ -203,7 +205,7 @@ VMMouseClient_Enable(void) {
     */
 
    VMwareLog(("VMMouseClient_Enable: go go go!\n"));
-   return TRUE;
+   return true;
 }
 
 
