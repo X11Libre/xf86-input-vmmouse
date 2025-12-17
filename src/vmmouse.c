@@ -953,8 +953,6 @@ VMMouseSwitchMode(ClientPtr client, DeviceIntPtr dev, int mode)
  *----------------------------------------------------------------------
  */
 
-#ifdef XFree86LOADER
-
 /*
  *----------------------------------------------------------------------
  *
@@ -1033,4 +1031,3 @@ _X_EXPORT XF86ModuleData vmmouseModuleData = {
    VMMousePlug,
    VMMouseUnplug
 };
-#endif /* XFree86LOADER */
