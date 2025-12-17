@@ -31,11 +31,7 @@
  *      The communication protocol between the guest and the vmmouse
  *      virtual device.
  */
-
-
-#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
 
 #include "vmmouse_proto.h"
 

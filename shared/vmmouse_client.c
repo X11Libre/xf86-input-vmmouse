@@ -34,10 +34,7 @@
  * packets via the VMMouse module hosted in the VMX.
  *
  */
-
-#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
 
 #include <stdbool.h>
 
