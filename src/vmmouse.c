@@ -122,7 +122,7 @@ static void MouseCommonOptions(InputInfoPtr pInfo);
 static void GetVMMouseMotionEvent(InputInfoPtr pInfo);
 static void VMMousePostEvent(InputInfoPtr pInfo, int buttons, int dx, int dy, int dz, int dw);
 static void VMMouseDoPostEvent(InputInfoPtr pInfo, int buttons, int dx, int dy);
-static bool VMMouseDeviceControl(DeviceIntPtr device, int mode);
+static Bool VMMouseDeviceControl(DeviceIntPtr device, int mode);
 static int  VMMouseControlProc(InputInfoPtr pInfo, xDeviceCtl * control);
 static void VMMouseReadInput(InputInfoPtr pInfo);
 static int  VMMouseSwitchMode(ClientPtr client, DeviceIntPtr dev, int mode);
@@ -622,7 +622,7 @@ VMMouseUnInit(InputDriverPtr drv, InputInfoPtr pInfo, int flags)
  *----------------------------------------------------------------------
  */
 
-static bool
+static Bool
 VMMouseDeviceControl(DeviceIntPtr device, int mode)
 {
    InputInfoPtr pInfo;
