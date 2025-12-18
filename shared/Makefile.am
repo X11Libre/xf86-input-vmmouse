@@ -18,10 +18,10 @@
 #  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 #  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-noinst_LTLIBRARIES = lib@DRIVER_NAME@.la
-lib@DRIVER_NAME@_la_SOURCES = @DRIVER_NAME@_defs.h \
-                              @DRIVER_NAME@_client.c @DRIVER_NAME@_client.h \
-                              @DRIVER_NAME@_proto.c @DRIVER_NAME@_proto.h
+noinst_LTLIBRARIES = libvmmouse.la
+libvmmouse_la_SOURCES = vmmouse_defs.h \
+                              vmmouse_client.c vmmouse_client.h \
+                              vmmouse_proto.c vmmouse_proto.h
 
 AM_CPPFLAGS = $(XORG_CFLAGS)
 AM_CFLAGS = $(BASE_CFLAGS)

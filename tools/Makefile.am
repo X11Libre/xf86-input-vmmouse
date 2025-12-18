@@ -18,15 +18,15 @@
 #  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 #  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-bin_PROGRAMS = @DRIVER_NAME@_detect
+bin_PROGRAMS = vmmouse_detect
 
 AM_CPPFLAGS = -I$(top_srcdir)/shared $(XORG_CFLAGS)
 AM_CFLAGS = $(BASE_CFLAGS)
 
-@DRIVER_NAME@_detect_SOURCES = vmmouse_detect.c vmmouse_udev.c vmmouse_iopl.c
-@DRIVER_NAME@_detect_LDADD = $(top_builddir)/shared/lib@DRIVER_NAME@.la \
+vmmouse_detect_SOURCES = vmmouse_detect.c vmmouse_udev.c vmmouse_iopl.c
+vmmouse_detect_LDADD = $(top_builddir)/shared/libvmmouse.la \
 				@LIBUDEV_LIBS@
-@DRIVER_NAME@_detect_CFLAGS = @LIBUDEV_CFLAGS@
+vmmouse_detect_CFLAGS = @LIBUDEV_CFLAGS@
 
 
 calloutsdir=$(HAL_CALLOUTS_DIR)
