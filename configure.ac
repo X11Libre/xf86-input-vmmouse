@@ -21,10 +21,10 @@
 # Process this file with autoconf to produce a configure script
 
 AC_PREREQ(2.60)
-AC_INIT([xf86-input-vmmouse],
+AC_INIT([xlibre-xf86-input-vmmouse],
         [13.2.0],
-        [https://gitlab.freedesktop.org/xorg/driver/xf86-input-vmmouse/issues],
-        xf86-input-vmmouse)
+        [https://github.com/X11Libre/xf86-input-vmmouse/issues],
+        [xlibre-xf86-input-vmmouse])
 
 AC_CONFIG_SRCDIR([Makefile.am])
 AC_CONFIG_AUX_DIR(.)
