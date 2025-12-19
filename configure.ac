@@ -182,7 +182,7 @@ if test x$use_x86_64_iopl = xyes; then
                 [AC_MSG_ERROR([cannot find library for x86_64_iopl])])
 fi
 
-PKG_CHECK_MODULES(XORG, [xorg-server >= 1.18] xproto $REQUIRED_MODULES)
+PKG_CHECK_MODULES(XORG, [xorg-server >= 25.0.0] xproto $REQUIRED_MODULES)
 
 # Checks for libraries.
 
