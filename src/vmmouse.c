@@ -154,7 +154,7 @@ VMMouseInitPassthru(InputDriverPtr drv, InputInfoPtr pInfo, int flags)
 {
    InputAttributes *attrs = NULL;
    InputOption *input_options = NULL;
-   pointer options;
+   void *options;
    DeviceIntPtr dev;
    int rc;
 
@@ -963,7 +963,7 @@ VMMouseSwitchMode(ClientPtr client, DeviceIntPtr dev, int mode)
  */
 
 static void
-VMMouseUnplug(pointer p)
+VMMouseUnplug(void *p)
 {
    xf86Msg(X_INFO, "VMWARE(0): VMMouseUnplug\n");
 }
@@ -987,9 +987,9 @@ VMMouseUnplug(pointer p)
  *----------------------------------------------------------------------
  */
 
-static pointer
-VMMousePlug(pointer	module,
-	    pointer	options,
+static void*
+VMMousePlug(void *module,
+	    void *options,
 	    int		*errmaj,
 	    int		*errmin)
 {
