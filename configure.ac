@@ -184,11 +184,6 @@ fi
 
 PKG_CHECK_MODULES(XORG, [xorg-server >= 25.0.0] xproto $REQUIRED_MODULES)
 
-# Checks for libraries.
-
-# Checks for header files.
-AC_HEADER_STDC
-
 AC_CONFIG_FILES([Makefile
 	shared/Makefile
 	src/Makefile
