@@ -45,7 +45,7 @@ XORG_DEFAULT_OPTIONS
 
 # Checks for programs.
 AC_DISABLE_STATIC
-AC_PROG_LIBTOOL
+LT_INIT
 
 AH_TOP([#include "xorg-server.h"])
 
