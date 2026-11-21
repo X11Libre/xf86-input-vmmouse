@@ -34,7 +34,8 @@ AM_INIT_AUTOMAKE([foreign dist-xz])
 
 # XORG_DEFAULT_OPTIONS below forces C99. Solaris GCC doesn't like that.
 AC_PROG_CC
-AC_PROG_CC_C89
+# Autoconf 2.70 and later pick the C standard in AC_PROG_CC.
+m4_version_prereq([2.70], [], [AC_PROG_CC_C89])
 save_solaris_cc=$CC
 
 # Require X.Org macros 1.8 or later for MAN_SUBSTS set by XORG_MANPAGE_SECTIONS
